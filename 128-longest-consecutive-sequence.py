@@ -24,7 +24,7 @@ def longestConsecutive(nums: List[int]) -> int:
     dp = [1] * len(nums)
     for n in range(len(s) - 2, -1, -1):
         if s[n] + 1 == s[n + 1]:
-            dp[n] = dp[n+1] + 1
+            dp[n] += dp[n+1]
 
     return max(dp)
 
