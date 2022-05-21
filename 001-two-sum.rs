@@ -31,12 +31,33 @@ fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     unreachable!()
 }
 
+use std::collections::HashMap;
+
+fn two_sum_2(nums: Vec<i32>, target: i32) -> Vec<i32> {
+    let _len_n = nums.len();
+    let mut num_to_idx = HashMap::<i32, usize>::new();
+    for (idx, num) in nums.into_iter().enumerate() {
+        let expected_sum = target - num;
+        match num_to_idx.get(&expected_sum) {
+            Some(&prev_idx) => return vec![prev_idx as i32, idx as i32],
+            _ => {
+                num_to_idx.insert(num, idx);
+            }
+        }
+    }
+    unreachable!()
+}
+
 fn main() {
     let a1 = vec![2, 7, 11, 15];
     let a2 = vec![3, 2, 4];
     let a3 = vec![3, 3];
     
-    println!("{:?}",two_sum(a1, 9));
-    println!("{:?}",two_sum(a2, 6));
-    println!("{:?}",two_sum(a3, 6));
+    // println!("{:?}",two_sum(a1, 9));
+    // println!("{:?}",two_sum(a2, 6));
+    // println!("{:?}",two_sum(a3, 6));
+    
+    println!("{:?}",two_sum_2(a1, 9));
+    println!("{:?}",two_sum_2(a2, 6));
+    println!("{:?}",two_sum_2(a3, 6));
 }
